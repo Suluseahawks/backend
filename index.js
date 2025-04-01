@@ -5,18 +5,20 @@ const newsletterRoute = require("./routes/newsletterRoutes");
 const blogRoute = require("./routes/blog");
 const contactRoute = require("./routes/contact");
 const employeeRoutes = require("./routes/employeeRoutes");
-const departmentRoutes=require("./routes/departmentRoutes")
-const designationRoutes=require("./routes/designationRoutes")
+const departmentRoutes = require("./routes/departmentRoutes")
+const designationRoutes = require("./routes/designationRoutes")
+const taskRoutes = require("./routes/taskRoutes");
+
 
 const authRoutes = require("./routes/authenticationRoutes");
-const roleRoutes=require("./routes/roleRoutes");
+const roleRoutes = require("./routes/roleRoutes");
 
 const multer = require("multer");
 
 
-require('dotenv').config({path : "./.env"});
+require('dotenv').config({ path: "./.env" });
 
-const connectToDB = require("./utils/database"); 
+const connectToDB = require("./utils/database");
 
 //new addon requires
 const cookieParser = require("cookie-parser");
@@ -27,7 +29,7 @@ const app = express();
 
 // Use CORS middleware to allow requests from your frontend
 app.use(cors({
-  origin: [process.env.WOUESSI_FRONTEND_URL, "https://dev.wouessi.com/en", "https://dev.wouessi.com", "https://www.wouessi.com/en", "https://www.wouessi.com", "https://www.wouessi.ca/en/", "https://www.wouessi.ca"], // Dynamically set the allowed CORS origin
+  origin: ["http://localhost:3000", process.env.WOUESSI_FRONTEND_URL, "https://dev.wouessi.com/en", "https://dev.wouessi.com", "https://www.wouessi.com/en", "https://www.wouessi.com", "https://www.wouessi.ca/en/", "https://www.wouessi.ca"], // Dynamically set the allowed CORS origin
   credentials: true,
 }));
 
@@ -49,9 +51,10 @@ app.use("/api/auth", authRoutes);
 
 // Employee Routes
 app.use("/api/employee", employeeRoutes);
-app.use("/api/department",departmentRoutes);
-app.use("/api/role",roleRoutes);
-app.use("/api/designation",designationRoutes);
+app.use("/api/department", departmentRoutes);
+app.use("/api/role", roleRoutes);
+app.use("/api/designation", designationRoutes);
+app.use("/api/tasks", taskRoutes);
 
 
 const dbName = "Wouessi";
